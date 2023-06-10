@@ -32,6 +32,30 @@ jobs:
           if-no-files-found: ignore
           retention-days: 5
 
+  cypress-run-firefox:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout 🛎
+        uses: actions/checkout@v3
+
+      - name: Run Cypress tests in Firefox
+        uses: cypress-io/github-action@v5
+        with:
+          browser: firefox
+
+      - name: Upload Firefox artifacts 📸
+        uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: firefox-artifacts
+          path: |
+            cypress/videos
+            cypress/screenshots
+          if-no-files-found: ignore
+          retention-days: 5
+
   cypress-run-edge:
     runs-on: ubuntu-latest
     timeout-minutes: 5
@@ -50,6 +74,28 @@ jobs:
         if: failure()
         with:
           name: edge-artifacts
+          path: |
+            cypress/videos
+            cypress/screenshots
+          if-no-files-found: ignore
+          retention-days: 5
+
+  cypress-run-electron:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout 🛎
+        uses: actions/checkout@v3
+
+      - name: Run Cypress tests in Electron
+        uses: cypress-io/github-action@v5
+
+      - name: Upload Electron artifacts 📸
+        uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: electron-artifacts
           path: |
             cypress/videos
             cypress/screenshots
