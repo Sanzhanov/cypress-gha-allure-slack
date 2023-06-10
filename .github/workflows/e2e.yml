@@ -31,3 +31,27 @@ jobs:
             cypress/screenshots
           if-no-files-found: ignore
           retention-days: 5
+
+  cypress-run-edge:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout 🛎
+        uses: actions/checkout@v3
+
+      - name: Run Cypress tests in Edge
+        uses: cypress-io/github-action@v5
+        with:
+          browser: edge
+
+      - name: Upload Edge artifacts 📸
+        uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: edge-artifacts
+          path: |
+            cypress/videos
+            cypress/screenshots
+          if-no-files-found: ignore
+          retention-days: 5
