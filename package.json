@@ -1,6 +1,6 @@
 {
   "name": "cypress-docker",
-  "description": "Running Cypress tests in Docker containers using various Docker images",
+  "description": "Running Cypress tests in CI/CD with Allure reporting and automatically sending it to Slack",
   "scripts": {
     "cy:open": "cypress open",
     "cy:run": "cypress run",
